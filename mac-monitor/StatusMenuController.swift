@@ -28,8 +28,10 @@ class StatusMenuController: NSObject {
         //let icon = NSImage(named: "statusIcon")
         //icon?.template = true
         //statusItem.image = icon
-        renderTitle()
+        curTempMenuItem = statusMenu.itemArray[0].submenu?.itemWithTitle("C");
+        curTempMenuItem?.state = NSOnState;
         statusItem.menu = statusMenu
+        renderTitle()
     }
     
     @IBAction func quitClicked(sender: NSMenuItem) {
