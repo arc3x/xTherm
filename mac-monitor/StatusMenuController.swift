@@ -5,6 +5,9 @@
 //  Created by Matthew Slocum on 6/27/16.
 //  Copyright © 2016 Matthew Slocum, Sami Sahli. All rights reserved.
 //
+//  The basic functionality of this code was established using a tutorial
+//  at http://footle.org/WeatherBar/ 
+//  the vast majority of it has changed, but credit where it's due.
 
 // NOTE: battery temp ioreg -r -n AppleSmartBattery | grep Temperature | cut -c23-
 
