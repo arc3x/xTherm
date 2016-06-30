@@ -14,6 +14,8 @@
 
 import Cocoa
 
+
+
 class StatusMenuController: NSObject {
     
     @IBOutlet weak var statusMenu: NSMenu!
@@ -24,14 +26,19 @@ class StatusMenuController: NSObject {
     var temperatue: Double = 0
     var curTempMenuItem: NSMenuItem? //ptr to last button to set temp units (for toggle off)
     
+    // tracked temperatures
+    var cpuTemp: Double = 0
+    
     override func awakeFromNib() {
         //let icon = NSImage(named: "statusIcon")
         //icon?.template = true
         //statusItem.image = icon
-        curTempMenuItem = statusMenu.itemArray[0].submenu?.itemWithTitle("C");
+        curTempMenuItem = statusMenu.itemArray[0].submenu?.itemWithTitle("C")
         curTempMenuItem?.state = NSOnState;
         statusItem.menu = statusMenu
         renderTitle()
+        
+        
     }
     
     @IBAction func quitClicked(sender: NSMenuItem) {
@@ -39,14 +46,14 @@ class StatusMenuController: NSObject {
     }
     
     @IBAction func setTempFClicked(sender: NSMenuItem) {
-        setTemp(sender, unit: "F")
+        setTempUnits(sender, unit: "F")
     }
     
     @IBAction func setTempCClicked(sender: NSMenuItem) {
-        setTemp(sender, unit: "C")
+        setTempUnits(sender, unit: "C")
     }
     
-    func setTemp(sender: NSMenuItem, unit: Character) {
+    func setTempUnits(sender: NSMenuItem, unit: Character) {
         if (curTempMenuItem == sender) {
             return
         }
@@ -59,8 +66,18 @@ class StatusMenuController: NSObject {
         renderTitle()
     }
     
+    func refreshTempData() {
+        // read temp data
+        let _ = try? SMCKit.open()
+        //let tempSensors = try? SMCKit.allKnownTemperatureSensors()
+        //print(tempSensors)
+        cpuTemp = try! SMCKit.temperature(1413689424)
+        SMCKit.close()
+    }
+    
     func renderTitle() {
-        var t: Double = temperatue
+        refreshTempData()
+        var t: Double = cpuTemp
         if (tempUnit=="F") {
             t = (t * 1.8) + 32
         }
