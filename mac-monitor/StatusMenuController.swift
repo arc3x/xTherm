@@ -23,7 +23,10 @@ class StatusMenuController: NSObject {
     @IBOutlet weak var statusMenu: NSMenu!
     
     // application settings
-    var tempUnit: Character = "C"
+    var tempUnit: String = "C"
+    // for saving settings on quit
+    // http://stackoverflow.com/questions/28628225/how-do-you-save-local-storage-data-in-a-swift-application
+    let defaults = NSUserDefaults.standardUserDefaults()
     
     // application variables
     var temperatue: Double = 0
@@ -34,10 +37,27 @@ class StatusMenuController: NSObject {
     
     // bootstrapping function
     override func awakeFromNib() {
-        // default to Celcius
-        curTempMenuItem = statusMenu.itemArray[0].submenu?.itemWithTitle("C")
-        // apply a check mark to the menu item
-        curTempMenuItem?.state = NSOnState;
+        // if set -> get last settings
+        if let t = defaults.stringForKey("tempUnit") {
+            tempUnit = t;
+            if (t == "C") {
+                // get pointer for toggle
+                curTempMenuItem = statusMenu.itemArray[0].submenu?.itemWithTitle("C")
+                // apply a check mark to the menu item
+                curTempMenuItem?.state = NSOnState
+            } else {
+                curTempMenuItem = statusMenu.itemArray[0].submenu?.itemWithTitle("F")
+                // apply a check mark to the menu item
+                curTempMenuItem?.state = NSOnState
+            }
+        }
+        // else -> default to Celcius
+        else {
+            // get pointer for toggle
+            curTempMenuItem = statusMenu.itemArray[0].submenu?.itemWithTitle("C")
+            // apply a check mark to the menu item
+            curTempMenuItem?.state = NSOnState
+        }
         // link the menu to the status bar "view"
         statusItem.menu = statusMenu
         // process and write info to the view
@@ -48,11 +68,15 @@ class StatusMenuController: NSObject {
     
     // quit menu option
     @IBAction func quitClicked(sender: NSMenuItem) {
+        // save settings
+        defaults.setObject(tempUnit, forKey: "tempUnit")
+        // quit
         NSApplication.sharedApplication().terminate(self)
     }
     
     // Tempature Unit -> F menu option
     @IBAction func setTempFClicked(sender: NSMenuItem) {
+        
         setTempUnits(sender, unit: "F")
     }
     
@@ -63,7 +87,7 @@ class StatusMenuController: NSObject {
     
     // helper function
     // sets temp variables, swaps 'checked' state, and re-renders
-    func setTempUnits(sender: NSMenuItem, unit: Character) {
+    func setTempUnits(sender: NSMenuItem, unit: String) {
         // if we are changing to current value ret
         if (curTempMenuItem == sender) {
             return
@@ -101,7 +125,7 @@ class StatusMenuController: NSObject {
             t = (t * 1.8) + 32
         }
         // wrtie temp to status bar
-        statusItem.title = String(Int(t))+" \u{00B0}"+String(tempUnit)
+        statusItem.title = String(Int(t))+" \u{00B0}"+tempUnit
     }
     
   
