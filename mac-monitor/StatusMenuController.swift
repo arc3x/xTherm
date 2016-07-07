@@ -13,13 +13,19 @@ import Cocoa
 
 class StatusMenuController: NSObject {
     
-    @IBOutlet weak var statusMenu: NSMenu!
-    
+    // timer for display refresh
     var refreshTimer = NSTimer()
     
+    // statas bar app
     let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(60)
     
+    // menu for status bar
+    @IBOutlet weak var statusMenu: NSMenu!
+    
+    // application settings
     var tempUnit: Character = "C"
+    
+    // application variables
     var temperatue: Double = 0
     var curTempMenuItem: NSMenuItem? //ptr to last button to set temp units (for toggle off)
     
