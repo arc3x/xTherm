@@ -29,10 +29,7 @@ class StatusMenuController: NSObject {
     let defaults = NSUserDefaults.standardUserDefaults()
     
     // application variables
-    var temperatue: Double = 0
     var curTempMenuItem: NSMenuItem? //ptr to last button to set temp units (for toggle off)
-    
-    // tracked temperatures
     var cpuTemp: Double = 0
     
     // bootstrapping function
@@ -46,6 +43,7 @@ class StatusMenuController: NSObject {
                 // apply a check mark to the menu item
                 curTempMenuItem?.state = NSOnState
             } else {
+                // get pointer for toggle
                 curTempMenuItem = statusMenu.itemArray[0].submenu?.itemWithTitle("F")
                 // apply a check mark to the menu item
                 curTempMenuItem?.state = NSOnState
