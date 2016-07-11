@@ -36,7 +36,11 @@ class StatusMenuController: NSObject {
     // pointers to menu items (for writing to)
     var cpuMaxTempMenu: NSMenuItem?
     
+    
+    // * * *
     // bootstrapping function
+    // * * *
+    
     override func awakeFromNib() {
         // if set -> get last settings
         if let t = defaults.stringForKey("tempUnit") {
@@ -72,12 +76,16 @@ class StatusMenuController: NSObject {
         refreshTimer = NSTimer.scheduledTimerWithTimeInterval(2.5, target: self, selector: #selector(StatusMenuController.renderMenu), userInfo: nil, repeats: true)
     }
     
-    // quit menu option
-    @IBAction func quitClicked(sender: NSMenuItem) {
-        // save settings
-        defaults.setObject(tempUnit, forKey: "tempUnit")
-        // quit
-        NSApplication.sharedApplication().terminate(self)
+    
+    // * * *
+    // Menu Item Bindings
+    // * * *
+    
+    //  clears the recored max cpu temp
+    @IBAction func clearMaxCpuTempClicked(sender: NSMenuItem) {
+        cpuMaxTemp = 0
+        renderMenu()
+        
     }
     
     // Tempature Unit -> F menu option
@@ -90,7 +98,19 @@ class StatusMenuController: NSObject {
         setTempUnits(sender, unit: "C")
     }
     
-    // helper function
+    // quit menu option
+    @IBAction func quitClicked(sender: NSMenuItem) {
+        // save settings
+        defaults.setObject(tempUnit, forKey: "tempUnit")
+        // quit
+        NSApplication.sharedApplication().terminate(self)
+    }
+    
+    
+    // * * *
+    // helper functions
+    // * * *
+    
     // sets temp variables, swaps 'checked' state, and re-renders
     func setTempUnits(sender: NSMenuItem, unit: String) {
         // if we are changing to current value ret
@@ -106,15 +126,7 @@ class StatusMenuController: NSObject {
         sender.state = NSOnState
         curTempUnitMenuItem = sender
         // re-render
-        renderTitle()
-    }
-    
-    // updates the menu with current data
-    func renderMenu() {
-        // get new tempature
-        refreshTempData()
-        renderTitle()
-        renderCpuMaxTemp()
+        renderMenu()
     }
     
     // gets new data from temp sensors
@@ -129,6 +141,20 @@ class StatusMenuController: NSObject {
         if (cpuTemp > cpuMaxTemp) {
             cpuMaxTemp = cpuTemp
         }
+    }
+    
+    
+    // * * *
+    // render functions
+    // * * *
+    
+    // updates the menu with current data
+    func renderMenu() {
+        // get new tempature data
+        refreshTempData()
+        // update menu
+        renderTitle()
+        renderCpuMaxTemp()
     }
     
     // does unit conversion and writes tempature to status bar "view"
