@@ -19,6 +19,12 @@
                 <menuItem title="CPU Max Temp: " tag="1" id="96d-nc-S4x">
                     <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>
+                <menuItem title="Clear" id="ZPA-z8-xio">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="clearMaxCpuTempClicked:" target="38C-AG-QlR" id="cpj-UI-bCY"/>
+                    </connections>
+                </menuItem>
                 <menuItem isSeparatorItem="YES" id="mWO-I6-2lQ"/>
                 <menuItem title="Temperature Units" id="ZbS-JP-ZwJ" userLabel="Unit Menu">
                     <modifierMask key="keyEquivalentModifierMask"/>

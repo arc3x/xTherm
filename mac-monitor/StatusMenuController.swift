@@ -81,6 +81,13 @@ class StatusMenuController: NSObject {
     // Menu Item Bindings
     // * * *
     
+    //  clears the recored max cpu temp
+    @IBAction func clearMaxCpuTempClicked(sender: NSMenuItem) {
+        cpuMaxTemp = 0
+        renderMenu()
+        
+    }
+    
     // Tempature Unit -> F menu option
     @IBAction func setTempFClicked(sender: NSMenuItem) {
         setTempUnits(sender, unit: "F")
@@ -119,7 +126,7 @@ class StatusMenuController: NSObject {
         sender.state = NSOnState
         curTempUnitMenuItem = sender
         // re-render
-        renderTitle()
+        renderMenu()
     }
     
     // gets new data from temp sensors
