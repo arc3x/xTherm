@@ -36,7 +36,9 @@ class StatusMenuController: NSObject {
     // pointers to menu items (for writing to)
     var cpuMaxTempMenu: NSMenuItem?
     
+    // * * *
     // bootstrapping function
+    // * * *
     override func awakeFromNib() {
         // if set -> get last settings
         if let t = defaults.stringForKey("tempUnit") {
@@ -72,13 +74,9 @@ class StatusMenuController: NSObject {
         refreshTimer = NSTimer.scheduledTimerWithTimeInterval(2.5, target: self, selector: #selector(StatusMenuController.renderMenu), userInfo: nil, repeats: true)
     }
     
-    // quit menu option
-    @IBAction func quitClicked(sender: NSMenuItem) {
-        // save settings
-        defaults.setObject(tempUnit, forKey: "tempUnit")
-        // quit
-        NSApplication.sharedApplication().terminate(self)
-    }
+    // * * *
+    // Menu Item Bindings
+    // * * *
     
     // Tempature Unit -> F menu option
     @IBAction func setTempFClicked(sender: NSMenuItem) {
@@ -88,6 +86,14 @@ class StatusMenuController: NSObject {
     // Tempature Unit -> C menu option
     @IBAction func setTempCClicked(sender: NSMenuItem) {
         setTempUnits(sender, unit: "C")
+    }
+    
+    // quit menu option
+    @IBAction func quitClicked(sender: NSMenuItem) {
+        // save settings
+        defaults.setObject(tempUnit, forKey: "tempUnit")
+        // quit
+        NSApplication.sharedApplication().terminate(self)
     }
     
     // helper function
