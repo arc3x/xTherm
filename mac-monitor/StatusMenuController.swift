@@ -29,8 +29,12 @@ class StatusMenuController: NSObject {
     let defaults = NSUserDefaults.standardUserDefaults()
     
     // application variables
-    var curTempMenuItem: NSMenuItem? //ptr to last button to set temp units (for toggle off)
+    var curTempUnitMenuItem: NSMenuItem? //ptr to last button to set temp units (for toggle off)
     var cpuTemp: Double = 0
+    var cpuMaxTemp: Double = 0
+    
+    // pointers to menu items (for writing to)
+    var cpuMaxTempMenu: NSMenuItem?
     
     // bootstrapping function
     override func awakeFromNib() {
@@ -39,29 +43,33 @@ class StatusMenuController: NSObject {
             tempUnit = t;
             if (t == "C") {
                 // get pointer for toggle
-                curTempMenuItem = statusMenu.itemArray[0].submenu?.itemWithTitle("C")
+                curTempUnitMenuItem = statusMenu.itemWithTitle("Temperature Units")!.submenu?.itemWithTitle("C")
                 // apply a check mark to the menu item
-                curTempMenuItem?.state = NSOnState
+                curTempUnitMenuItem?.state = NSOnState
             } else {
                 // get pointer for toggle
-                curTempMenuItem = statusMenu.itemArray[0].submenu?.itemWithTitle("F")
+                curTempUnitMenuItem = statusMenu.itemWithTitle("Temperature Units")!.submenu?.itemWithTitle("F")
                 // apply a check mark to the menu item
-                curTempMenuItem?.state = NSOnState
+                curTempUnitMenuItem?.state = NSOnState
             }
         }
         // else -> default to Celcius
         else {
             // get pointer for toggle
-            curTempMenuItem = statusMenu.itemArray[0].submenu?.itemWithTitle("C")
+            curTempUnitMenuItem = statusMenu.itemWithTitle("Temperature Units")!.submenu?.itemWithTitle("C")
             // apply a check mark to the menu item
-            curTempMenuItem?.state = NSOnState
+            curTempUnitMenuItem?.state = NSOnState
         }
         // link the menu to the status bar "view"
         statusItem.menu = statusMenu
-        // process and write info to the view
-        renderTitle()
-        // setup a timer to refresh the view
-        refreshTimer = NSTimer.scheduledTimerWithTimeInterval(2.5, target: self, selector: #selector(StatusMenuController.renderTitle), userInfo: nil, repeats: true)
+        // get ptr to cpuMaxTemp meun item
+        cpuMaxTempMenu = statusMenu.itemWithTag(1)
+        // set default value
+        cpuMaxTempMenu?.title="CPU Max Temp 0 \u{00B0}"+tempUnit
+        // process and write info to the menu
+        renderMenu()
+        // setup a timer to refresh the menu
+        refreshTimer = NSTimer.scheduledTimerWithTimeInterval(2.5, target: self, selector: #selector(StatusMenuController.renderMenu), userInfo: nil, repeats: true)
     }
     
     // quit menu option
@@ -74,7 +82,6 @@ class StatusMenuController: NSObject {
     
     // Tempature Unit -> F menu option
     @IBAction func setTempFClicked(sender: NSMenuItem) {
-        
         setTempUnits(sender, unit: "F")
     }
     
@@ -87,19 +94,27 @@ class StatusMenuController: NSObject {
     // sets temp variables, swaps 'checked' state, and re-renders
     func setTempUnits(sender: NSMenuItem, unit: String) {
         // if we are changing to current value ret
-        if (curTempMenuItem == sender) {
+        if (curTempUnitMenuItem == sender) {
             return
         }
         // change units
         tempUnit = unit
         // swap 'checked' state
-        if (curTempMenuItem != nil) {
-            curTempMenuItem?.state = NSOffState
+        if (curTempUnitMenuItem != nil) {
+            curTempUnitMenuItem?.state = NSOffState
         }
         sender.state = NSOnState
-        curTempMenuItem = sender
+        curTempUnitMenuItem = sender
         // re-render
         renderTitle()
+    }
+    
+    // updates the menu with current data
+    func renderMenu() {
+        // get new tempature
+        refreshTempData()
+        renderTitle()
+        renderCpuMaxTemp()
     }
     
     // gets new data from temp sensors
@@ -110,12 +125,14 @@ class StatusMenuController: NSObject {
         cpuTemp = try! SMCKit.temperature(1413689424)
         // close connection
         SMCKit.close()
+        // update cpuMaxTemp if applicable
+        if (cpuTemp > cpuMaxTemp) {
+            cpuMaxTemp = cpuTemp
+        }
     }
     
     // does unit conversion and writes tempature to status bar "view"
     func renderTitle() {
-        // get new tempature
-        refreshTempData()
         // get local copy of cpuTemp
         var t: Double = cpuTemp
         // convert if necissary
@@ -124,6 +141,18 @@ class StatusMenuController: NSObject {
         }
         // wrtie temp to status bar
         statusItem.title = String(Int(t))+" \u{00B0}"+tempUnit
+    }
+    
+    // does unit conversion and writes max recorded temperature to menu
+    func renderCpuMaxTemp() {
+        // get local copy of cpuMaxTemp
+        var t: Double = cpuMaxTemp
+        // convert if necissary
+        if (tempUnit=="F") {
+            t = (t * 1.8) + 32
+        }
+        // wrtie temp to status bar
+        cpuMaxTempMenu?.title="CPU Max Temp "+String(Int(t))+" \u{00B0}"+tempUnit
     }
     
   
