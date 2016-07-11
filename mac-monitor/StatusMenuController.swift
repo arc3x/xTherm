@@ -36,9 +36,11 @@ class StatusMenuController: NSObject {
     // pointers to menu items (for writing to)
     var cpuMaxTempMenu: NSMenuItem?
     
+    
     // * * *
     // bootstrapping function
     // * * *
+    
     override func awakeFromNib() {
         // if set -> get last settings
         if let t = defaults.stringForKey("tempUnit") {
@@ -74,6 +76,7 @@ class StatusMenuController: NSObject {
         refreshTimer = NSTimer.scheduledTimerWithTimeInterval(2.5, target: self, selector: #selector(StatusMenuController.renderMenu), userInfo: nil, repeats: true)
     }
     
+    
     // * * *
     // Menu Item Bindings
     // * * *
@@ -96,7 +99,11 @@ class StatusMenuController: NSObject {
         NSApplication.sharedApplication().terminate(self)
     }
     
-    // helper function
+    
+    // * * *
+    // helper functions
+    // * * *
+    
     // sets temp variables, swaps 'checked' state, and re-renders
     func setTempUnits(sender: NSMenuItem, unit: String) {
         // if we are changing to current value ret
@@ -115,14 +122,6 @@ class StatusMenuController: NSObject {
         renderTitle()
     }
     
-    // updates the menu with current data
-    func renderMenu() {
-        // get new tempature
-        refreshTempData()
-        renderTitle()
-        renderCpuMaxTemp()
-    }
-    
     // gets new data from temp sensors
     func refreshTempData() {
         // open connection to SMC api
@@ -135,6 +134,19 @@ class StatusMenuController: NSObject {
         if (cpuTemp > cpuMaxTemp) {
             cpuMaxTemp = cpuTemp
         }
+    }
+    
+    
+    // * * *
+    // render functions
+    // * * *
+    
+    // updates the menu with current data
+    func renderMenu() {
+        // get new tempature
+        refreshTempData()
+        renderTitle()
+        renderCpuMaxTemp()
     }
     
     // does unit conversion and writes tempature to status bar "view"
