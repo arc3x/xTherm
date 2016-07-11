@@ -11,7 +11,7 @@
 		6ED5C3E91D224D220033D757 /* StatusMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED5C3E81D224D220033D757 /* StatusMenuController.swift */; };
 		6EED6BB91D22410700C3EC24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED6BB81D22410700C3EC24 /* AppDelegate.swift */; };
 		6EED6BBB1D22410700C3EC24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EED6BBA1D22410700C3EC24 /* Assets.xcassets */; };
-		6EED6BBE1D22410700C3EC24 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EED6BBC1D22410700C3EC24 /* MainMenu.xib */; };
+		6EED6BBE1D22410700C3EC24 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EED6BBC1D22410700C3EC24 /* MainMenu.xib */; settings = {ASSET_TAGS = (TempUnitMenu, ); }; };
 		6EED6BC91D22410700C3EC24 /* mac_monitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED6BC81D22410700C3EC24 /* mac_monitorTests.swift */; };
 		6EED6BD41D22410700C3EC24 /* mac_monitorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED6BD31D22410700C3EC24 /* mac_monitorUITests.swift */; };
 /* End PBXBuildFile section */
@@ -187,6 +187,9 @@
 		6EED6BAD1D22410700C3EC24 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					TempUnitMenu,
+				);
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Matthew Slocum, Sami Sahli";
