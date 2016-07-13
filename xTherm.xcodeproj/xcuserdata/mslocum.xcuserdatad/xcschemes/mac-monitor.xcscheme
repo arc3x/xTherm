@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6EED6BB41D22410700C3EC24"
-               BuildableName = "mac-monitor.app"
-               BlueprintName = "mac-monitor"
-               ReferencedContainer = "container:mac-monitor.xcodeproj">
+               BuildableName = "xTherm.app"
+               BlueprintName = "xTherm"
+               ReferencedContainer = "container:xTherm.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6EED6BC31D22410700C3EC24"
-               BuildableName = "mac-monitorTests.xctest"
-               BlueprintName = "mac-monitorTests"
-               ReferencedContainer = "container:mac-monitor.xcodeproj">
+               BuildableName = "xTherm.xctest"
+               BlueprintName = "xThermTests"
+               ReferencedContainer = "container:xTherm.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6EED6BCE1D22410700C3EC24"
-               BuildableName = "mac-monitorUITests.xctest"
-               BlueprintName = "mac-monitorUITests"
-               ReferencedContainer = "container:mac-monitor.xcodeproj">
+               BuildableName = "xTherm.xctest"
+               BlueprintName = "xThermUITests"
+               ReferencedContainer = "container:xTherm.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6EED6BB41D22410700C3EC24"
-            BuildableName = "mac-monitor.app"
-            BlueprintName = "mac-monitor"
-            ReferencedContainer = "container:mac-monitor.xcodeproj">
+            BuildableName = "xTherm.app"
+            BlueprintName = "xTherm"
+            ReferencedContainer = "container:xTherm.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6EED6BB41D22410700C3EC24"
-            BuildableName = "mac-monitor.app"
-            BlueprintName = "mac-monitor"
-            ReferencedContainer = "container:mac-monitor.xcodeproj">
+            BuildableName = "xTherm.app"
+            BlueprintName = "xTherm"
+            ReferencedContainer = "container:xTherm.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6EED6BB41D22410700C3EC24"
-            BuildableName = "mac-monitor.app"
-            BlueprintName = "mac-monitor"
-            ReferencedContainer = "container:mac-monitor.xcodeproj">
+            BuildableName = "xTherm.app"
+            BlueprintName = "xTherm"
+            ReferencedContainer = "container:xTherm.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
