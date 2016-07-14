@@ -212,8 +212,12 @@ class StatusMenuController: NSObject {
     // write current and max fan speeds
     func renderFanSpeeds() {
         for i in 0 ..< fanCount {
+            let curFanSpeedPercent =
+                String(Int((Double(fanCurrentSpeeds[i])
+                    / Double(fanMaxSpeeds[i])) * 100))
             let fanMenuItemTitle = "Fan " + String(i) + ": " +
-                String(fanCurrentSpeeds[i]) + "RPM (max " +
+                String(fanCurrentSpeeds[i]) + "RPM (" +
+                curFanSpeedPercent + "%) (max " +
                 String(fanMaxSpeeds[i]) + "RPM)"
             fanMenuItems[i]?.title = fanMenuItemTitle
         }
