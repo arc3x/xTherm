@@ -150,9 +150,8 @@ class StatusMenuController: NSObject {
     
     // updates the menu with current data
     func renderMenu() {
-        // get new tempature data
+        // get new tempature
         refreshTempData()
-        // update menu
         renderTitle()
         renderCpuMaxTemp()
     }
