@@ -13,154 +13,143 @@ import Cocoa
 
 class StatusMenuController: NSObject {
     
-    // timer for display refresh
+    // Timer used for rendering and refreshing
     var refreshTimer = NSTimer()
     
-    // statas bar app
     let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(60)
     
-    // menu for status bar
     @IBOutlet weak var statusMenu: NSMenu!
     
-    // application settings
-    var tempUnit: String = "C"
-    // for saving settings on quit
+    // Application settings; for saving on quit:
     // http://stackoverflow.com/questions/28628225/how-do-you-save-local-storage-data-in-a-swift-application
+    var tempUnit: String = "C"
     let defaults = NSUserDefaults.standardUserDefaults()
     
-    // application variables
-    var curTempUnitMenuItem: NSMenuItem? //ptr to last button to set temp units (for toggle off)
+    // Application variables
+    var curTempUnitMenuItem: NSMenuItem? // ptr to last button to set temp units (for toggle off)
+    var cpuMaxTempMenu: NSMenuItem?
+    var fanMenuItems: Array<NSMenuItem?> = Array()
     var cpuTemp: Double = 0
     var cpuMaxTemp: Double = 0
     var fanCount: Int = 0
     var fanCurrentSpeeds: Array<Int> = Array()
     var fanMaxSpeeds: Array<Int> = Array()
     
-    
-    // pointers to menu items (for writing to)
-    var cpuMaxTempMenu: NSMenuItem?
-    var fanMenuItems: Array<NSMenuItem?> = Array()
-    
+ 
     
     // * * *
     // bootstrapping function
     // * * *
     
     override func awakeFromNib() {
-        // if set -> get last settings
+        // Load previous settings if available
         if let t = defaults.stringForKey("tempUnit") {
             tempUnit = t;
             if (t == "C") {
-                // get pointer for toggle
                 curTempUnitMenuItem = statusMenu.itemWithTitle("Temperature Units")!.submenu?.itemWithTitle("C")
-                // apply a check mark to the menu item
                 curTempUnitMenuItem?.state = NSOnState
             } else {
-                // get pointer for toggle
                 curTempUnitMenuItem = statusMenu.itemWithTitle("Temperature Units")!.submenu?.itemWithTitle("F")
-                // apply a check mark to the menu item
                 curTempUnitMenuItem?.state = NSOnState
             }
         }
-        // else -> default to Celcius
+            
+        // Default to Celsius
         else {
-            // get pointer for toggle
             curTempUnitMenuItem = statusMenu.itemWithTitle("Temperature Units")!.submenu?.itemWithTitle("C")
-            // apply a check mark to the menu item
             curTempUnitMenuItem?.state = NSOnState
         }
-        // link the menu to the status bar "view"
+        
+        // Init max temp to 0
         statusItem.menu = statusMenu
-        // get ptr to cpuMaxTemp meun item
         cpuMaxTempMenu = statusMenu.itemWithTag(1)
-        // set default value
         cpuMaxTempMenu?.title="CPU Max Temp 0 \u{00B0}"+tempUnit
-        // get number of fans
+
+        // Retrieve number of fans
         let _ = try? SMCKit.open()
         fanCount = try! SMCKit.fanCount()
         SMCKit.close()
-        // default fan values, and add new menu items per fan
+        
+        // Init fan speeds to 0, add menu items per fan
         for i in 0 ..< fanCount {
             fanCurrentSpeeds.append(0)
             fanMaxSpeeds.append(0)
             fanMenuItems.append(NSMenuItem())
             let fanMenuTitle = "Fan " + String(i) + ": "
             fanMenuItems[i]?.title = fanMenuTitle
-            statusMenu?.insertItem((fanMenuItems[i])!, atIndex: 3+i)
+            statusMenu?.insertItem((fanMenuItems[i])!, atIndex: 3 + i)
         }
-        // process and write info to the menu
+        
+        // Render, and continue rendering with refreshTimer
         renderMenu()
-        // setup a timer to refresh the menu
         refreshTimer = NSTimer.scheduledTimerWithTimeInterval(2.5, target: self, selector: #selector(StatusMenuController.renderMenu), userInfo: nil, repeats: true)
     }
+    
     
     
     // * * *
     // Menu Item Bindings
     // * * *
     
-    //  clears the recored max cpu temp
+    // Reset the max temp
     @IBAction func clearMaxCpuTempClicked(sender: NSMenuItem) {
         cpuMaxTemp = 0
         renderMenu()
     }
     
-    // Tempature Unit -> F menu option
+    // Tempature Unit -> F
     @IBAction func setTempFClicked(sender: NSMenuItem) {
         setTempUnits(sender, unit: "F")
     }
     
-    // Tempature Unit -> C menu option
+    // Tempature Unit -> C
     @IBAction func setTempCClicked(sender: NSMenuItem) {
         setTempUnits(sender, unit: "C")
     }
     
-    // quit menu option
+    // Save tempUnit and quit
     @IBAction func quitClicked(sender: NSMenuItem) {
-        // save settings
         defaults.setObject(tempUnit, forKey: "tempUnit")
-        // quit
         NSApplication.sharedApplication().terminate(self)
     }
     
     
+    
     // * * *
-    // helper functions
+    // Helper functions
     // * * *
     
-    // sets temp variables, swaps 'checked' state, and re-renders
+    // Switch temperature units
     func setTempUnits(sender: NSMenuItem, unit: String) {
-        // if we are changing to current value ret
         if (curTempUnitMenuItem == sender) {
             return
         }
-        // change units
+
         tempUnit = unit
-        // swap 'checked' state
+        // Swap "checked" states
         if (curTempUnitMenuItem != nil) {
             curTempUnitMenuItem?.state = NSOffState
         }
+        
         sender.state = NSOnState
         curTempUnitMenuItem = sender
-        // re-render
+ 
         renderMenu()
     }
     
-    // gets new data from temp sensors
+    // Refresh temperature from SMCKit
     func refreshTempData() {
-        // open connection to SMC api
         let _ = try? SMCKit.open()
-        // read CPU proximity sensor
         cpuTemp = try! SMCKit.temperature(1413689424)
-        // close connection
         SMCKit.close()
-        // update cpuMaxTemp if applicable
+        
         if (cpuTemp > cpuMaxTemp) {
             cpuMaxTemp = cpuTemp
         }
     }
     
-    // get current and max fan speeds
+    // Refresh fan speeds
+    // FIXME: Not necessary to keep retrieving max fan speed; it doesn't change
     func refreshFanData() {
         let _ = try? SMCKit.open()
         for i in 0 ..< fanCount {
@@ -171,13 +160,13 @@ class StatusMenuController: NSObject {
     }
     
     
+    
     // * * *
-    // render functions
+    // Render functions
     // * * *
     
-    // updates the menu with current data
+    // Refresh data and render
     func renderMenu() {
-        // get new tempature
         refreshTempData()
         refreshFanData()
         renderTitle()
@@ -185,43 +174,42 @@ class StatusMenuController: NSObject {
         renderFanSpeeds()
     }
     
-    // does unit conversion and writes tempature to status bar "view"
+    // Render menu title; convert temperature if necessary
     func renderTitle() {
-        // get local copy of cpuTemp
         var t: Double = cpuTemp
-        // convert if necissary
+
         if (tempUnit=="F") {
             t = (t * 1.8) + 32
         }
-        // wrtie temp to status bar
-        statusItem.title = String(Int(t))+" \u{00B0}"+tempUnit
+
+        statusItem.title = String(Int(t)) + " \u{00B0}" + tempUnit
     }
     
-    // does unit conversion and writes max recorded temperature to menu
+    // Render max temp menu title; convert temperature if necessary
     func renderCpuMaxTemp() {
-        // get local copy of cpuMaxTemp
         var t: Double = cpuMaxTemp
-        // convert if necissary
+        
         if (tempUnit=="F") {
             t = (t * 1.8) + 32
         }
-        // wrtie temp to status bar
-        cpuMaxTempMenu?.title="CPU Max Temp "+String(Int(t))+" \u{00B0}"+tempUnit
+        
+        cpuMaxTempMenu?.title =
+            "CPU Max Temp " + String(Int(t)) + " \u{00B0}" + tempUnit
     }
     
-    // write current and max fan speeds
+    // Render fan speeds menu titles
     func renderFanSpeeds() {
         for i in 0 ..< fanCount {
             let curFanSpeedPercent =
                 String(Int((Double(fanCurrentSpeeds[i])
                     / Double(fanMaxSpeeds[i])) * 100))
+            
             let fanMenuItemTitle = "Fan " + String(i) + ": " +
                 String(fanCurrentSpeeds[i]) + "RPM (" +
                 curFanSpeedPercent + "%) (max " +
                 String(fanMaxSpeeds[i]) + "RPM)"
+            
             fanMenuItems[i]?.title = fanMenuItemTitle
         }
     }
-    
-  
 }
