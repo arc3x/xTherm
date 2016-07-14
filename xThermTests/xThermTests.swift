@@ -1,6 +1,6 @@
 //
-//  mac_monitorTests.swift
-//  mac-monitorTests
+//  xThermTests.swift
+//  xThermTests
 //
 //  Created by Matthew Slocum on 6/27/16.
 //  Copyright © 2016 Matthew Slocum, Sami Sahli. All rights reserved.

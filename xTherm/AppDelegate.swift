@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  mac-monitor
+//  xTherm
 //
 //  Created by Matthew Slocum on 6/27/16.
 //  Copyright © 2016 Matthew Slocum, Sami Sahli. All rights reserved.

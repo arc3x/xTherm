@@ -12,7 +12,7 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="mac_monitor" customModuleProvider="target"/>
+        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="xTherm" customModuleProvider="target"/>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <menu id="0zL-T1-kxX">
             <items>
@@ -55,7 +55,7 @@
             </items>
             <point key="canvasLocation" x="187" y="309.5"/>
         </menu>
-        <customObject id="38C-AG-QlR" userLabel="StatusMenuController" customClass="StatusMenuController" customModule="mac_monitor" customModuleProvider="target">
+        <customObject id="38C-AG-QlR" userLabel="StatusMenuController" customClass="StatusMenuController" customModule="xTherm" customModuleProvider="target">
             <connections>
                 <outlet property="statusMenu" destination="0zL-T1-kxX" id="M8d-uB-pZR"/>
             </connections>
