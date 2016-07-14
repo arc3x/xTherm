@@ -12,8 +12,8 @@
 		6EED6BB91D22410700C3EC24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED6BB81D22410700C3EC24 /* AppDelegate.swift */; };
 		6EED6BBB1D22410700C3EC24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EED6BBA1D22410700C3EC24 /* Assets.xcassets */; };
 		6EED6BBE1D22410700C3EC24 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EED6BBC1D22410700C3EC24 /* MainMenu.xib */; settings = {ASSET_TAGS = (TempUnitMenu, ); }; };
-		6EED6BC91D22410700C3EC24 /* mac_monitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED6BC81D22410700C3EC24 /* mac_monitorTests.swift */; };
-		6EED6BD41D22410700C3EC24 /* mac_monitorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED6BD31D22410700C3EC24 /* mac_monitorUITests.swift */; };
+		6EED6BC91D22410700C3EC24 /* xThermTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED6BC81D22410700C3EC24 /* xThermTests.swift */; };
+		6EED6BD41D22410700C3EC24 /* xThermUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED6BD31D22410700C3EC24 /* xThermUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,16 +36,16 @@
 /* Begin PBXFileReference section */
 		6EC37D1C1D24EF4F0020D670 /* SMCKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMCKit.swift; sourceTree = "<group>"; };
 		6ED5C3E81D224D220033D757 /* StatusMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusMenuController.swift; sourceTree = "<group>"; };
-		6EED6BB51D22410700C3EC24 /* mac-monitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mac-monitor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EED6BB51D22410700C3EC24 /* xTherm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = xTherm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EED6BB81D22410700C3EC24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6EED6BBA1D22410700C3EC24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6EED6BBD1D22410700C3EC24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		6EED6BBF1D22410700C3EC24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6EED6BC41D22410700C3EC24 /* mac-monitorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mac-monitorTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6EED6BC81D22410700C3EC24 /* mac_monitorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mac_monitorTests.swift; sourceTree = "<group>"; };
+		6EED6BC41D22410700C3EC24 /* xTherm.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = xTherm.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EED6BC81D22410700C3EC24 /* xThermTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = xThermTests.swift; sourceTree = "<group>"; };
 		6EED6BCA1D22410700C3EC24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6EED6BCF1D22410700C3EC24 /* mac-monitorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mac-monitorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6EED6BD31D22410700C3EC24 /* mac_monitorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mac_monitorUITests.swift; sourceTree = "<group>"; };
+		6EED6BCF1D22410700C3EC24 /* xTherm.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = xTherm.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EED6BD31D22410700C3EC24 /* xThermUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = xThermUITests.swift; sourceTree = "<group>"; };
 		6EED6BD51D22410700C3EC24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,9 +77,9 @@
 		6EED6BAC1D22410700C3EC24 = {
 			isa = PBXGroup;
 			children = (
-				6EED6BB71D22410700C3EC24 /* mac-monitor */,
-				6EED6BC71D22410700C3EC24 /* mac-monitorTests */,
-				6EED6BD21D22410700C3EC24 /* mac-monitorUITests */,
+				6EED6BB71D22410700C3EC24 /* xTherm */,
+				6EED6BC71D22410700C3EC24 /* xThermTests */,
+				6EED6BD21D22410700C3EC24 /* xThermUITests */,
 				6EED6BB61D22410700C3EC24 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -87,14 +87,14 @@
 		6EED6BB61D22410700C3EC24 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6EED6BB51D22410700C3EC24 /* mac-monitor.app */,
-				6EED6BC41D22410700C3EC24 /* mac-monitorTests.xctest */,
-				6EED6BCF1D22410700C3EC24 /* mac-monitorUITests.xctest */,
+				6EED6BB51D22410700C3EC24 /* xTherm.app */,
+				6EED6BC41D22410700C3EC24 /* xTherm.xctest */,
+				6EED6BCF1D22410700C3EC24 /* xTherm.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6EED6BB71D22410700C3EC24 /* mac-monitor */ = {
+		6EED6BB71D22410700C3EC24 /* xTherm */ = {
 			isa = PBXGroup;
 			children = (
 				6EED6BB81D22410700C3EC24 /* AppDelegate.swift */,
@@ -104,33 +104,33 @@
 				6EED6BBF1D22410700C3EC24 /* Info.plist */,
 				6EC37D1C1D24EF4F0020D670 /* SMCKit.swift */,
 			);
-			path = "mac-monitor";
+			path = xTherm;
 			sourceTree = "<group>";
 		};
-		6EED6BC71D22410700C3EC24 /* mac-monitorTests */ = {
+		6EED6BC71D22410700C3EC24 /* xThermTests */ = {
 			isa = PBXGroup;
 			children = (
-				6EED6BC81D22410700C3EC24 /* mac_monitorTests.swift */,
+				6EED6BC81D22410700C3EC24 /* xThermTests.swift */,
 				6EED6BCA1D22410700C3EC24 /* Info.plist */,
 			);
-			path = "mac-monitorTests";
+			path = xThermTests;
 			sourceTree = "<group>";
 		};
-		6EED6BD21D22410700C3EC24 /* mac-monitorUITests */ = {
+		6EED6BD21D22410700C3EC24 /* xThermUITests */ = {
 			isa = PBXGroup;
 			children = (
-				6EED6BD31D22410700C3EC24 /* mac_monitorUITests.swift */,
+				6EED6BD31D22410700C3EC24 /* xThermUITests.swift */,
 				6EED6BD51D22410700C3EC24 /* Info.plist */,
 			);
-			path = "mac-monitorUITests";
+			path = xThermUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6EED6BB41D22410700C3EC24 /* mac-monitor */ = {
+		6EED6BB41D22410700C3EC24 /* xTherm */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6EED6BD81D22410700C3EC24 /* Build configuration list for PBXNativeTarget "mac-monitor" */;
+			buildConfigurationList = 6EED6BD81D22410700C3EC24 /* Build configuration list for PBXNativeTarget "xTherm" */;
 			buildPhases = (
 				6EED6BB11D22410700C3EC24 /* Sources */,
 				6EED6BB21D22410700C3EC24 /* Frameworks */,
@@ -140,14 +140,14 @@
 			);
 			dependencies = (
 			);
-			name = "mac-monitor";
+			name = xTherm;
 			productName = "mac-monitor";
-			productReference = 6EED6BB51D22410700C3EC24 /* mac-monitor.app */;
+			productReference = 6EED6BB51D22410700C3EC24 /* xTherm.app */;
 			productType = "com.apple.product-type.application";
 		};
-		6EED6BC31D22410700C3EC24 /* mac-monitorTests */ = {
+		6EED6BC31D22410700C3EC24 /* xThermTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6EED6BDB1D22410700C3EC24 /* Build configuration list for PBXNativeTarget "mac-monitorTests" */;
+			buildConfigurationList = 6EED6BDB1D22410700C3EC24 /* Build configuration list for PBXNativeTarget "xThermTests" */;
 			buildPhases = (
 				6EED6BC01D22410700C3EC24 /* Sources */,
 				6EED6BC11D22410700C3EC24 /* Frameworks */,
@@ -158,14 +158,14 @@
 			dependencies = (
 				6EED6BC61D22410700C3EC24 /* PBXTargetDependency */,
 			);
-			name = "mac-monitorTests";
+			name = xThermTests;
 			productName = "mac-monitorTests";
-			productReference = 6EED6BC41D22410700C3EC24 /* mac-monitorTests.xctest */;
+			productReference = 6EED6BC41D22410700C3EC24 /* xTherm.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		6EED6BCE1D22410700C3EC24 /* mac-monitorUITests */ = {
+		6EED6BCE1D22410700C3EC24 /* xThermUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6EED6BDE1D22410700C3EC24 /* Build configuration list for PBXNativeTarget "mac-monitorUITests" */;
+			buildConfigurationList = 6EED6BDE1D22410700C3EC24 /* Build configuration list for PBXNativeTarget "xThermUITests" */;
 			buildPhases = (
 				6EED6BCB1D22410700C3EC24 /* Sources */,
 				6EED6BCC1D22410700C3EC24 /* Frameworks */,
@@ -176,9 +176,9 @@
 			dependencies = (
 				6EED6BD11D22410700C3EC24 /* PBXTargetDependency */,
 			);
-			name = "mac-monitorUITests";
+			name = xThermUITests;
 			productName = "mac-monitorUITests";
-			productReference = 6EED6BCF1D22410700C3EC24 /* mac-monitorUITests.xctest */;
+			productReference = 6EED6BCF1D22410700C3EC24 /* xTherm.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -207,7 +207,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 6EED6BB01D22410700C3EC24 /* Build configuration list for PBXProject "mac-monitor" */;
+			buildConfigurationList = 6EED6BB01D22410700C3EC24 /* Build configuration list for PBXProject "xTherm" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -220,9 +220,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6EED6BB41D22410700C3EC24 /* mac-monitor */,
-				6EED6BC31D22410700C3EC24 /* mac-monitorTests */,
-				6EED6BCE1D22410700C3EC24 /* mac-monitorUITests */,
+				6EED6BB41D22410700C3EC24 /* xTherm */,
+				6EED6BC31D22410700C3EC24 /* xThermTests */,
+				6EED6BCE1D22410700C3EC24 /* xThermUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -268,7 +268,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EED6BC91D22410700C3EC24 /* mac_monitorTests.swift in Sources */,
+				6EED6BC91D22410700C3EC24 /* xThermTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,7 +276,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EED6BD41D22410700C3EC24 /* mac_monitorUITests.swift in Sources */,
+				6EED6BD41D22410700C3EC24 /* xThermUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,12 +285,12 @@
 /* Begin PBXTargetDependency section */
 		6EED6BC61D22410700C3EC24 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6EED6BB41D22410700C3EC24 /* mac-monitor */;
+			target = 6EED6BB41D22410700C3EC24 /* xTherm */;
 			targetProxy = 6EED6BC51D22410700C3EC24 /* PBXContainerItemProxy */;
 		};
 		6EED6BD11D22410700C3EC24 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6EED6BB41D22410700C3EC24 /* mac-monitor */;
+			target = 6EED6BB41D22410700C3EC24 /* xTherm */;
 			targetProxy = 6EED6BD01D22410700C3EC24 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -394,10 +394,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = "mac-monitor/Info.plist";
+				INFOPLIST_FILE = xTherm/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "test.mac-monitor";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = oss.xTherm;
+				PRODUCT_NAME = xTherm;
 			};
 			name = Debug;
 		};
@@ -406,10 +406,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = "mac-monitor/Info.plist";
+				INFOPLIST_FILE = xTherm/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "test.mac-monitor";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = oss.xTherm;
+				PRODUCT_NAME = xTherm;
 			};
 			name = Release;
 		};
@@ -421,8 +421,8 @@
 				INFOPLIST_FILE = "mac-monitorTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "test.mac-monitorTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mac-monitor.app/Contents/MacOS/mac-monitor";
+				PRODUCT_NAME = xTherm;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/xTherm.app/Contents/MacOS/xTherm";
 			};
 			name = Debug;
 		};
@@ -434,8 +434,8 @@
 				INFOPLIST_FILE = "mac-monitorTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "test.mac-monitorTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mac-monitor.app/Contents/MacOS/mac-monitor";
+				PRODUCT_NAME = xTherm;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/xTherm.app/Contents/MacOS/xTherm";
 			};
 			name = Release;
 		};
@@ -446,7 +446,7 @@
 				INFOPLIST_FILE = "mac-monitorUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "test.mac-monitorUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = xTherm;
 				TEST_TARGET_NAME = "mac-monitor";
 			};
 			name = Debug;
@@ -458,7 +458,7 @@
 				INFOPLIST_FILE = "mac-monitorUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "test.mac-monitorUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = xTherm;
 				TEST_TARGET_NAME = "mac-monitor";
 			};
 			name = Release;
@@ -466,7 +466,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6EED6BB01D22410700C3EC24 /* Build configuration list for PBXProject "mac-monitor" */ = {
+		6EED6BB01D22410700C3EC24 /* Build configuration list for PBXProject "xTherm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6EED6BD61D22410700C3EC24 /* Debug */,
@@ -475,7 +475,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6EED6BD81D22410700C3EC24 /* Build configuration list for PBXNativeTarget "mac-monitor" */ = {
+		6EED6BD81D22410700C3EC24 /* Build configuration list for PBXNativeTarget "xTherm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6EED6BD91D22410700C3EC24 /* Debug */,
@@ -484,7 +484,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6EED6BDB1D22410700C3EC24 /* Build configuration list for PBXNativeTarget "mac-monitorTests" */ = {
+		6EED6BDB1D22410700C3EC24 /* Build configuration list for PBXNativeTarget "xThermTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6EED6BDC1D22410700C3EC24 /* Debug */,
@@ -493,7 +493,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6EED6BDE1D22410700C3EC24 /* Build configuration list for PBXNativeTarget "mac-monitorUITests" */ = {
+		6EED6BDE1D22410700C3EC24 /* Build configuration list for PBXNativeTarget "xThermUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6EED6BDF1D22410700C3EC24 /* Debug */,

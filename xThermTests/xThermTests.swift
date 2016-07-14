@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import mac_monitor
+@testable import xTherm
 
 class mac_monitorTests: XCTestCase {
     
