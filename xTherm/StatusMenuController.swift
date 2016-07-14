@@ -32,9 +32,14 @@ class StatusMenuController: NSObject {
     var curTempUnitMenuItem: NSMenuItem? //ptr to last button to set temp units (for toggle off)
     var cpuTemp: Double = 0
     var cpuMaxTemp: Double = 0
+    var fanCount: Int = 0
+    var fanCurrentSpeeds: Array<Int> = Array()
+    var fanMaxSpeeds: Array<Int> = Array()
+    
     
     // pointers to menu items (for writing to)
     var cpuMaxTempMenu: NSMenuItem?
+    var fanMenuItems: Array<NSMenuItem?> = Array()
     
     
     // * * *
@@ -70,6 +75,19 @@ class StatusMenuController: NSObject {
         cpuMaxTempMenu = statusMenu.itemWithTag(1)
         // set default value
         cpuMaxTempMenu?.title="CPU Max Temp 0 \u{00B0}"+tempUnit
+        // get number of fans
+        let _ = try? SMCKit.open()
+        fanCount = try! SMCKit.fanCount()
+        SMCKit.close()
+        // default fan values, and add new menu items per fan
+        for i in 0 ..< fanCount {
+            fanCurrentSpeeds.append(0)
+            fanMaxSpeeds.append(0)
+            fanMenuItems.append(NSMenuItem())
+            let fanMenuTitle = "Fan " + String(i) + ": "
+            fanMenuItems[i]?.title = fanMenuTitle
+            statusMenu?.insertItem((fanMenuItems[i])!, atIndex: 3+i)
+        }
         // process and write info to the menu
         renderMenu()
         // setup a timer to refresh the menu
@@ -85,7 +103,6 @@ class StatusMenuController: NSObject {
     @IBAction func clearMaxCpuTempClicked(sender: NSMenuItem) {
         cpuMaxTemp = 0
         renderMenu()
-        
     }
     
     // Tempature Unit -> F menu option
@@ -143,6 +160,16 @@ class StatusMenuController: NSObject {
         }
     }
     
+    // get current and max fan speeds
+    func refreshFanData() {
+        let _ = try? SMCKit.open()
+        for i in 0 ..< fanCount {
+            fanCurrentSpeeds[i] = try! SMCKit.fanCurrentSpeed(i)
+            fanMaxSpeeds[i] = try! SMCKit.fanMaxSpeed(i)
+        }
+        SMCKit.close()
+    }
+    
     
     // * * *
     // render functions
@@ -152,8 +179,10 @@ class StatusMenuController: NSObject {
     func renderMenu() {
         // get new tempature
         refreshTempData()
+        refreshFanData()
         renderTitle()
         renderCpuMaxTemp()
+        renderFanSpeeds()
     }
     
     // does unit conversion and writes tempature to status bar "view"
@@ -178,6 +207,16 @@ class StatusMenuController: NSObject {
         }
         // wrtie temp to status bar
         cpuMaxTempMenu?.title="CPU Max Temp "+String(Int(t))+" \u{00B0}"+tempUnit
+    }
+    
+    // write current and max fan speeds
+    func renderFanSpeeds() {
+        for i in 0 ..< fanCount {
+            let fanMenuItemTitle = "Fan " + String(i) + ": " +
+                String(fanCurrentSpeeds[i]) + "RPM (max " +
+                String(fanMaxSpeeds[i]) + "RPM)"
+            fanMenuItems[i]?.title = fanMenuItemTitle
+        }
     }
     
   
