@@ -26,6 +26,7 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="mWO-I6-2lQ"/>
+                <menuItem isSeparatorItem="YES" id="zy8-jh-oM0"/>
                 <menuItem title="Temperature Units" id="ZbS-JP-ZwJ" userLabel="Unit Menu">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Temperature Units" id="JY2-yN-Shs">
