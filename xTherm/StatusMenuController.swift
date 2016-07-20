@@ -67,9 +67,12 @@ class StatusMenuController: NSObject {
         cpuMaxTempMenu = statusMenu.itemWithTag(1)
         cpuMaxTempMenu?.title="CPU Max Temp 0 \u{00B0}"+tempUnit
 
-        // Retrieve number of fans
+        // Retrieve number of fans and their max speeds
         let _ = try? SMCKit.open()
         fanCount = try! SMCKit.fanCount()
+        for i in 0 ..< fanCount {
+            fanMaxSpeeds.append(try!SMCKit.fanMaxSpeed(i))
+        }
         SMCKit.close()
         
         // Init fan speeds to 0, add menu items per fan
@@ -151,12 +154,10 @@ class StatusMenuController: NSObject {
     }
     
     // Refresh fan speeds
-    // FIXME: Not necessary to keep retrieving max fan speed; it doesn't change
     func refreshFanData() {
         let _ = try? SMCKit.open()
         for i in 0 ..< fanCount {
             fanCurrentSpeeds[i] = try! SMCKit.fanCurrentSpeed(i)
-            fanMaxSpeeds[i] = try! SMCKit.fanMaxSpeed(i)
         }
         SMCKit.close()
     }
