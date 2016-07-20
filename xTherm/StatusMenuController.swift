@@ -42,6 +42,9 @@ class StatusMenuController: NSObject {
     // * * *
     
     override func awakeFromNib() {
+        // Link our menu to the status bar
+        statusItem.menu = statusMenu
+        
         // Load previous settings if available
         if let t = defaults.stringForKey("tempUnit") {
             tempUnit = t;
@@ -61,7 +64,6 @@ class StatusMenuController: NSObject {
         }
         
         // Init max temp to 0
-        statusItem.menu = statusMenu
         cpuMaxTempMenu = statusMenu.itemWithTag(1)
         cpuMaxTempMenu?.title="CPU Max Temp 0 \u{00B0}"+tempUnit
 
