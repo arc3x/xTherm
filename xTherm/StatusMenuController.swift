@@ -42,6 +42,33 @@ class StatusMenuController: NSObject {
     // * * *
     
     override func awakeFromNib() {
+        // Init vars for directory & file path
+        let fileManager = NSFileManager.defaultManager()
+        var isDir: ObjCBool = false
+        let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+        let documentsDirectory: AnyObject = paths[0]
+        let dataPath = documentsDirectory.stringByAppendingPathComponent("xTherm")
+        
+        // Check if ~/Documents/xTherm exists; if not create it
+        if !fileManager.fileExistsAtPath(dataPath, isDirectory: &isDir) {
+            print(isDir)
+            // http://stackoverflow.com/questions/26931355/how-to-create-directory-using-swift-code-nsfilemanager
+            
+            
+            do {
+                try NSFileManager.defaultManager().createDirectoryAtPath(dataPath, withIntermediateDirectories: false, attributes: nil)
+            } catch let error as NSError {
+                print(error.localizedDescription);
+            }
+        }
+        
+        // Flush old logs
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let date = NSDate()
+        let dateToday = dateFormatter.stringFromDate(date)
+        print(dateString)
+        
         // Link our menu to the status bar
         statusItem.menu = statusMenu
         
