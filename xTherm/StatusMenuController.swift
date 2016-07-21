@@ -11,6 +11,8 @@
 
 import Cocoa
 
+
+
 class StatusMenuController: NSObject {
     
     @IBOutlet weak var statusMenu: NSMenu!
@@ -212,8 +214,8 @@ class StatusMenuController: NSObject {
         let _ = try? SMCKit.open()
         cpuTemp = try! SMCKit.temperature(1413689424)
         SMCKit.close()
-        
         if (cpuTemp > cpuMaxTemp) {
+            // update max recorded temp
             cpuMaxTemp = cpuTemp
         }
     }
@@ -228,7 +230,49 @@ class StatusMenuController: NSObject {
         SMCKit.close()
     }
     
+    // * * *
+    // Logging functions
+    // * * *
     
+    // writes sensor data to a <date>.xlog file
+    func logSensorData() {
+        //get todays date for log filename
+        // FIXME: do this every time?
+        let date = NSDate()
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dateToday = dateFormatter.stringFromDate(date)
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        let timestamp = dateFormatter.stringFromDate(date)
+        
+        // string to write out sensor data
+        let out: String = timestamp+"\tCPU Temperature "+String(cpuTemp)+" \u{00B0}C"
+        
+        //append log file
+        writeToFile(out, fileName: "/xTherm/"+dateToday+".xlog")
+    }
+    
+    // creates or appends data to a file
+    // http://stackoverflow.com/questions/36736215/append-new-string-to-txt-file-in-swift-2
+    func writeToFile(content: String, fileName: String) {
+        let contentToAppend = content+"\n"
+        let filePath = NSHomeDirectory() + "/Documents/" + fileName
+        
+        //Check if file exists
+        if let fileHandle = NSFileHandle(forWritingAtPath: filePath) {
+            //Append to file
+            fileHandle.seekToEndOfFile()
+            fileHandle.writeData(contentToAppend.dataUsingEncoding(NSUTF8StringEncoding)!)
+        }
+        else {
+            //Create new file
+            do {
+                try contentToAppend.writeToFile(filePath, atomically: true, encoding: NSUTF8StringEncoding)
+            } catch {
+                print("Error creating \(filePath)")
+            }
+        }
+    }
     
     // * * *
     // Render functions
@@ -238,6 +282,9 @@ class StatusMenuController: NSObject {
     func renderMenu() {
         refreshTempData()
         refreshFanData()
+        if loggingStatus {
+            logSensorData()
+        }
         renderTitle()
         renderCpuMaxTemp()
         renderFanSpeeds()
