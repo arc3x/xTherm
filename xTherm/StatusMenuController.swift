@@ -127,6 +127,9 @@ class StatusMenuController: NSObject {
             let fanMenuTitle = "Fan " + String(i) + ": "
             fanMenuItems[i]?.title = fanMenuTitle
             statusMenu?.insertItem((fanMenuItems[i])!, atIndex: 3 + i)
+            let _ = try? SMCKit.open()
+            fanMaxSpeeds[i] = try! SMCKit.fanMaxSpeed(i)
+            SMCKit.close()
         }
         
         // Render, and continue rendering with refreshTimer
@@ -204,7 +207,7 @@ class StatusMenuController: NSObject {
         renderMenu()
     }
     
-    // Refresh temperature from SMCKit
+    // Refresh temperature from SMCKit and save to log file
     func refreshTempData() {
         let _ = try? SMCKit.open()
         cpuTemp = try! SMCKit.temperature(1413689424)
@@ -216,7 +219,6 @@ class StatusMenuController: NSObject {
     }
     
     // Refresh fan speeds
-    // FIXME: Not necessary to keep retrieving max fan speed; it doesn't change
     func refreshFanData() {
         let _ = try? SMCKit.open()
         for i in 0 ..< fanCount {
