@@ -28,6 +28,8 @@ class StatusMenuController: NSObject {
     // Application variables
     // * * *
     
+    var xthermPath: String = ""
+    
     var logginStatusMenu: NSMenuItem?
     var loggingStatus: Bool = false
     
@@ -54,7 +56,7 @@ class StatusMenuController: NSObject {
         var isDir: ObjCBool = false
         let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
         let documentsDirectory: AnyObject = paths[0]
-        let xthermPath = documentsDirectory.stringByAppendingPathComponent("xTherm")
+        xthermPath = documentsDirectory.stringByAppendingPathComponent("xTherm")
         
         // Check if ~/Documents/xTherm exists; if not create it
         if !fileManager.fileExistsAtPath(xthermPath, isDirectory: &isDir) {
@@ -175,7 +177,7 @@ class StatusMenuController: NSObject {
     
     // Displays log
     @IBAction func showLogClicked(sender: NSMenuItem) {
-        
+        NSWorkspace.sharedWorkspace().selectFile(nil, inFileViewerRootedAtPath: xthermPath)
     }
     
     
