@@ -77,7 +77,7 @@ class StatusMenuController: NSObject {
         let dateYesterday = dateFormatter.stringFromDate(calendar.dateByAddingUnit(.Day, value: -1, toDate: NSDate(), options: [])!)
         let files = try! fileManager.contentsOfDirectoryAtPath(xthermPath)
         for file in files {
-            if (file != (dateToday+".log") && file != (dateYesterday+".log")) {
+            if (file != (dateToday+".xlog") && file != (dateYesterday+".xlog")) {
                 let _ = try? fileManager.removeItemAtPath(xthermPath+"/"+file)
             }
         }
