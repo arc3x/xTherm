@@ -243,7 +243,7 @@ class StatusMenuController: NSObject {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let dateToday = dateFormatter.stringFromDate(date)
-        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        dateFormatter.dateFormat = "hh:mm:ss"
         let timestamp = dateFormatter.stringFromDate(date)
         
         // string to write out sensor data
