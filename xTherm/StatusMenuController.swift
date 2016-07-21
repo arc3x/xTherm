@@ -13,25 +13,32 @@ import Cocoa
 
 class StatusMenuController: NSObject {
     
+    @IBOutlet weak var statusMenu: NSMenu!
+    
     // Timer used for rendering and refreshing
     var refreshTimer = NSTimer()
     
     let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(60)
     
-    @IBOutlet weak var statusMenu: NSMenu!
-    
     // Application settings; for saving on quit:
     // http://stackoverflow.com/questions/28628225/how-do-you-save-local-storage-data-in-a-swift-application
-    var tempUnit: String = "C"
     let defaults = NSUserDefaults.standardUserDefaults()
     
+    // * * *
     // Application variables
+    // * * *
+    
+    var logginStatusMenu: NSMenuItem?
+    var loggingStatus: Bool = false
+    
+    var tempUnit: String = "C"
     var curTempUnitMenuItem: NSMenuItem? // ptr to last button to set temp units (for toggle off)
     var cpuMaxTempMenu: NSMenuItem?
-    var fanMenuItems: Array<NSMenuItem?> = Array()
     var cpuTemp: Double = 0
     var cpuMaxTemp: Double = 0
+    
     var fanCount: Int = 0
+    var fanMenuItems: Array<NSMenuItem?> = Array()
     var fanCurrentSpeeds: Array<Int> = Array()
     var fanMaxSpeeds: Array<Int> = Array()
     
@@ -51,10 +58,7 @@ class StatusMenuController: NSObject {
         
         // Check if ~/Documents/xTherm exists; if not create it
         if !fileManager.fileExistsAtPath(xthermPath, isDirectory: &isDir) {
-            print(isDir)
             // http://stackoverflow.com/questions/26931355/how-to-create-directory-using-swift-code-nsfilemanager
-            
-            
             do {
                 try NSFileManager.defaultManager().createDirectoryAtPath(xthermPath, withIntermediateDirectories: false, attributes: nil)
             } catch let error as NSError {
@@ -79,10 +83,10 @@ class StatusMenuController: NSObject {
         // Link our menu to the status bar
         statusItem.menu = statusMenu
         
-        // Load previous settings if available
-        if let t = defaults.stringForKey("tempUnit") {
-            tempUnit = t;
-            if (t == "C") {
+        // Load previous temperature unit settings if available
+        if let temp = defaults.stringForKey("tempUnit") {
+            tempUnit = temp;
+            if (temp == "C") {
                 curTempUnitMenuItem = statusMenu.itemWithTitle("Temperature Units")!.submenu?.itemWithTitle("C")
                 curTempUnitMenuItem?.state = NSOnState
             } else {
@@ -90,11 +94,18 @@ class StatusMenuController: NSObject {
                 curTempUnitMenuItem?.state = NSOnState
             }
         }
-            
         // Default to Celsius
         else {
             curTempUnitMenuItem = statusMenu.itemWithTitle("Temperature Units")!.submenu?.itemWithTitle("C")
             curTempUnitMenuItem?.state = NSOnState
+        }
+        
+        // Load previous logging settings if available
+        if let logging: Optional<Bool> = defaults.boolForKey("logging") {
+            loggingStatus = logging!
+            if logging == true {
+                statusMenu.itemWithTitle("Logging")!.submenu?.itemWithTitle("Disabled")?.title = "Enabled"
+            }
         }
         
         // Init max temp to 0
@@ -147,6 +158,24 @@ class StatusMenuController: NSObject {
     @IBAction func quitClicked(sender: NSMenuItem) {
         defaults.setObject(tempUnit, forKey: "tempUnit")
         NSApplication.sharedApplication().terminate(self)
+    }
+    
+    // Toggles enable/disable of logging
+    @IBAction func toggleLoggingClicked(sender: NSMenuItem) {
+        if loggingStatus == true {
+            loggingStatus = false;
+            statusMenu.itemWithTitle("Logging")!.submenu?.itemWithTitle("Enabled")?.title = "Disabled"
+        } else {
+            loggingStatus = true;
+            statusMenu.itemWithTitle("Logging")!.submenu?.itemWithTitle("Disabled")?.title = "Enabled"
+        }
+        // save logging status for next load
+        defaults.setObject(loggingStatus, forKey: "logging")
+    }
+    
+    // Displays log
+    @IBAction func showLogClicked(sender: NSMenuItem) {
+        
     }
     
     

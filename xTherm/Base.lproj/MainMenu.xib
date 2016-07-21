@@ -46,6 +46,25 @@
                         </items>
                     </menu>
                 </menuItem>
+                <menuItem title="Logging" id="1Wh-8N-42g">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Logging" id="wNp-Bw-P3q">
+                        <items>
+                            <menuItem title="Disabled" id="AQI-7d-ZdY">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="toggleLoggingClicked:" target="38C-AG-QlR" id="OgN-CA-eUb"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Show Log" id="HhK-ZH-DJx">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showLogClicked:" target="38C-AG-QlR" id="0C4-87-fNa"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
                 <menuItem isSeparatorItem="YES" id="R8n-Bn-JcY"/>
                 <menuItem title="Quit" id="Xc2-z0-oQR">
                     <modifierMask key="keyEquivalentModifierMask"/>
