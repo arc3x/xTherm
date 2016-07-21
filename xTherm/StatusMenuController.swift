@@ -47,27 +47,34 @@ class StatusMenuController: NSObject {
         var isDir: ObjCBool = false
         let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
         let documentsDirectory: AnyObject = paths[0]
-        let dataPath = documentsDirectory.stringByAppendingPathComponent("xTherm")
+        let xthermPath = documentsDirectory.stringByAppendingPathComponent("xTherm")
         
         // Check if ~/Documents/xTherm exists; if not create it
-        if !fileManager.fileExistsAtPath(dataPath, isDirectory: &isDir) {
+        if !fileManager.fileExistsAtPath(xthermPath, isDirectory: &isDir) {
             print(isDir)
             // http://stackoverflow.com/questions/26931355/how-to-create-directory-using-swift-code-nsfilemanager
             
             
             do {
-                try NSFileManager.defaultManager().createDirectoryAtPath(dataPath, withIntermediateDirectories: false, attributes: nil)
+                try NSFileManager.defaultManager().createDirectoryAtPath(xthermPath, withIntermediateDirectories: false, attributes: nil)
             } catch let error as NSError {
                 print(error.localizedDescription);
             }
         }
         
-        // Flush old logs
+        // Flush logs older than 2 days
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let date = NSDate()
         let dateToday = dateFormatter.stringFromDate(date)
-        print(dateString)
+        let calendar = NSCalendar.currentCalendar()
+        let dateYesterday = dateFormatter.stringFromDate(calendar.dateByAddingUnit(.Day, value: -1, toDate: NSDate(), options: [])!)
+        let files = try! fileManager.contentsOfDirectoryAtPath(xthermPath)
+        for file in files {
+            if (file != (dateToday+".log") && file != (dateYesterday+".log")) {
+                let _ = try? fileManager.removeItemAtPath(xthermPath+"/"+file)
+            }
+        }
         
         // Link our menu to the status bar
         statusItem.menu = statusMenu
