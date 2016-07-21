@@ -107,6 +107,7 @@ class StatusMenuController: NSObject {
         // Load previous logging settings if available
         if let logging: Optional<Bool> = defaults.boolForKey("logging") {
             loggingStatus = logging!
+            statusMenu.itemWithTitle("Logging")!.submenu?.itemWithTitle("Disabled")?.state = NSOnState // apply check mark to menu item
             if logging == true {
                 statusMenu.itemWithTitle("Logging")!.submenu?.itemWithTitle("Disabled")?.title = "Enabled"
             }
