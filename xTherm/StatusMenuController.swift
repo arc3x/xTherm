@@ -2,6 +2,9 @@
 //  StatusMenuController.swift
 //  xTherm
 //
+//  Licensed under MIT
+//  See https://github.com/arc3x/xTherm for license information.
+//
 //  Created by Matthew Slocum on 6/27/16.
 //  Copyright © 2016 Matthew Slocum, Sami Sahli. All rights reserved.
 //
@@ -180,7 +183,7 @@ class StatusMenuController: NSObject {
             loggingStatus = true;
             statusMenu.itemWithTitle("Logging")!.submenu?.itemWithTitle("Disabled")?.title = "Enabled"
         }
-        // save logging status for next load
+        // Save logging status for next load
         defaults.setObject(loggingStatus, forKey: "logging")
     }
     
@@ -219,7 +222,7 @@ class StatusMenuController: NSObject {
         cpuTemp = try! SMCKit.temperature(1413689424)
         SMCKit.close()
         if (cpuTemp > cpuMaxTemp) {
-            // update max recorded temp
+            // Update max recorded temp
             cpuMaxTemp = cpuTemp
         }
     }
@@ -233,14 +236,14 @@ class StatusMenuController: NSObject {
         SMCKit.close()
     }
     
+    
+    
     // * * *
     // Logging functions
     // * * *
     
-    // writes sensor data to a <date>.xlog file
+    // Writes sensor data to a <date>.xlog file
     func logSensorData() {
-        //get todays date for log filename
-        // FIXME: do this every time?
         let date = NSDate()
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -248,27 +251,25 @@ class StatusMenuController: NSObject {
         dateFormatter.dateFormat = "hh:mm:ss"
         let timestamp = dateFormatter.stringFromDate(date)
         
-        // string to write out sensor data
         let out: String = timestamp+"\tCPU Temperature "+String(cpuTemp)+" \u{00B0}C"
         
-        //append log file
         writeToFile(out, fileName: "/xTherm/"+dateToday+".xlog")
     }
     
-    // creates or appends data to a file
+    // Creates or appends data to a file
     // http://stackoverflow.com/questions/36736215/append-new-string-to-txt-file-in-swift-2
     func writeToFile(content: String, fileName: String) {
         let contentToAppend = content+"\n"
         let filePath = NSHomeDirectory() + "/Documents/" + fileName
         
-        //Check if file exists
+        // Check if file exists
         if let fileHandle = NSFileHandle(forWritingAtPath: filePath) {
-            //Append to file
+            // Append to file
             fileHandle.seekToEndOfFile()
             fileHandle.writeData(contentToAppend.dataUsingEncoding(NSUTF8StringEncoding)!)
         }
+        // Create new file
         else {
-            //Create new file
             do {
                 try contentToAppend.writeToFile(filePath, atomically: true, encoding: NSUTF8StringEncoding)
             } catch {
@@ -276,6 +277,8 @@ class StatusMenuController: NSObject {
             }
         }
     }
+    
+    
     
     // * * *
     // Render functions
