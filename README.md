@@ -4,7 +4,7 @@ A mac temperature monitoring and logging application
 
 ![xTherm](/doc/menu.png?raw=true "xTherm in action")
 
-xTherm runs as a status menu application that displays CPU temperature and logs temperatures to file.
+xTherm runs as a status menu application that displays CPU temperature and optionally logs temperatures to file.
 
 Log files are located in ~/Documents/xTherm/
 
