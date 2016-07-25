@@ -2,7 +2,7 @@
 
 A mac temperature monitoring and logging application
 
-![xTherm](/doc/img/menu.png?raw=true "xTherm in action")
+![xTherm](/doc/menu.png?raw=true "xTherm in action")
 
 xTherm runs as a status menu application that displays CPU temperature and logs temperatures to file.
 
