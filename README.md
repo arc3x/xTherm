@@ -11,7 +11,7 @@ Log files are located in ~/Documents/xTherm/
 ## Usage
 
 Option 1 (recommended): Command line compile (from src directory)
-`xcodebuild -target xTherm -project xTherm.xcodeproj`
+```xcodebuild -target xTherm -project xTherm.xcodeproj```
 
 Option 2: Run directly from XCode 8
 
