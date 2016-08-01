@@ -1,6 +1,6 @@
 {
   "name": "xTherm",
   "tagline": "A mac system monitoring application",
-  "body": "### Welcome to xTherm\r\nxTherm is an open source CPU temperature monitor for mac OS X. xTherm displays as a status bar menu showing CPU temperature and fan speed. Logs of temperature are kept for two days. \r\n\r\n### Supported Systems\r\nOS X 10.11 (El Capitan)\r\n\r\n### Contributing\r\nWe love contributions, so head over to our [github](https://github.com/arc3x/xTherm) and file an issue, request an enhancement, or make a pull request.\r\n\r\n### Authors and Contributors\r\nMatthew Slocum (@arc3x)\r\nSami Sahli (@ssahli)",
+  "body": "### Welcome to xTherm\r\nxTherm is an open source CPU temperature monitor for mac OS X. xTherm displays as a status bar menu showing CPU temperature and fan speed. Logs of temperature are kept for two days. \r\n\r\n### Supported Systems\r\nOS X 10.11 (El Capitan)\r\n\r\n### Installing\r\n- Download the zip file containing a compiled binary\r\n- Right-Click on the binary and click 'open'\r\n- (optional) Add to your startup items\r\n\r\n### Contributing\r\nWe love contributions, so head over to our [github](https://github.com/arc3x/xTherm) and file an issue, request an enhancement, or make a pull request.\r\n\r\n### Authors and Contributors\r\nMatthew Slocum (@arc3x)\r\nSami Sahli (@ssahli)",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }
