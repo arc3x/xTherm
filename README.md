@@ -13,9 +13,9 @@ Backend powered by [SMCKit](https://github.com/beltex/SMCKit)
 For contributors, all program logic is located in StatusMenuController.swift
 
 ## Usage
-Option 1 (recommended): Download the binary [here](https://arc3x.github.io/xTherm)
+Option 1: Download unsigned the binary [here](https://arc3x.github.io/xTherm). You will have to right click to launch.
 
-Option 2: In the root directory of this project, run `make`
+Option 2 (recommended): In the root directory of this project, run `make`
 
 Option 3: Build in XCode 8 and run the executable file
   - Once open in XCode 8, open the Product menu item and select Build.
