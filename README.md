@@ -16,6 +16,7 @@ For contributors, all program logic is located in StatusMenuController.swift
 Option 1: Download unsigned the binary [here](https://arc3x.github.io/xTherm). You will have to right click to launch.
 
 Option 2 (recommended): In the root directory of this project, run `make`
+  - The binary will be in a folder called `build`
 
 Option 3: Build in XCode 8 and run the executable file
   - Once open in XCode 8, open the Product menu item and select Build.
